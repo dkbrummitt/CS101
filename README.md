@@ -1,5 +1,5 @@
 
-# ![CS101](http://placehold.it/150x150) CS101
+# CS101
 [![MIT License](https://img.shields.io/badge/license-MIT-007EC7.svg?style=flat-square)](/LICENSE) 
 
 - [Quick start](#Quick)
