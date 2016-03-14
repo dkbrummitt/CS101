@@ -14,7 +14,12 @@
 - [License](#License)
 
 
-CS101 is a _________ for __________.
+CS101 is a hobby project to remind myself and others why Computer Science basics are important. I recently helped a junior developer to decipher an API that used a vector of vector's to represent a CSV. Do not get me wrong. You can represent a CSV that why, but given all that is available, why would you want to if not at an instructor's direction?
+
+After seeing a gazillion for-loops, some nested. I decided to remind my self
+
+_"Always code as if the guy who ends up maintaining (or integrating) with your code will be a **violent psycopath** who knows where you live"_
+
 
 * Homepage: https://dkbrummitt.github.io/CS101
 * Source: https://github.com/dkbrummitt/CS101.git
