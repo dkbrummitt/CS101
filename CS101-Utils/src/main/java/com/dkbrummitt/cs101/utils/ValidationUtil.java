@@ -67,6 +67,7 @@ public class ValidationUtil {
                 empty = aDictionary.isEmpty();
             }
         }
+        System.out.println("isNullOrEmpty? " + (nill || empty));
         return nill || empty;
     }
 
@@ -77,14 +78,16 @@ public class ValidationUtil {
 
         between = value >= min && value <= max;
 
+        System.out.println("isBetween? " + " a=" + a + " b=" + b + " value=" + value + " between=" + between);
         return between;
     }
 
     public static boolean isAccessible(Collection aCollection, int ndx) {
         boolean accessible = false;
         if (!isNullOrEmpty(aCollection) && isBetween(0, aCollection.size() - 1, ndx)) {
-            return accessible;
+            accessible = true;
         }
+        System.out.println("isAccessible? " + accessible);
         return accessible;
     }
 }
