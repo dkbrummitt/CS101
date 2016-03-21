@@ -1,6 +1,7 @@
 
 # CS101
 [![MIT License](https://img.shields.io/badge/license-MIT-007EC7.svg?style=flat-square)](/LICENSE) 
+[![Stories in Ready](https://badge.waffle.io/dkbrummitt/CS101.svg?label=ready&title=Ready)](http://waffle.io/dkbrummitt/CS101)
 
 - [Quick start](#Quick)
 - [Installation](#Installation)
