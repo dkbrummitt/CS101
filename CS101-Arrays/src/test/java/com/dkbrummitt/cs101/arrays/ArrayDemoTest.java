@@ -28,6 +28,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import java.util.Arrays;
 
 /**
  *
@@ -36,49 +37,103 @@ import org.junit.Test;
 public class ArrayDemoTest {
 
     ArrayDemo functionalDemo;
-    ArrayDemo performanceDemo;
     int functionalTestSize = 5;
-    int performanceTestSize = 1000;
-    int stringSize = 10;
 
-    public ArrayDemoTest() {
-    }
+    public ArrayDemoTest() {}
 
     private void initArray(String[] anArray) {
-
         for (int ndx = 0; ndx < anArray.length; ndx++) {
-            anArray[ndx] = GeneratorUtil.randomString(stringSize);
+            anArray[ndx] = Integer.toString(ndx);
         }
     }
 
     @Before
     public void setUp() {
         String[] functionalArray = new String[functionalTestSize];
-        String[] performanceArray = new String[performanceTestSize];
         initArray(functionalArray);
-        initArray(performanceArray);
-        System.out.println("performanceArray[1]=" + performanceArray[1]);
-        System.out.println("functionalArray[1]=" + functionalArray[1]);
 
-        performanceDemo = new ArrayDemo(performanceArray);
         functionalDemo = new ArrayDemo(functionalArray);
-
     }
 
     @Test
-    public void access_functional_SHOULD_null_WHEN_InvalidIndex() {
+    public void access_SHOULD_null_WHEN_InvalidIndex() {
         int invalidIndex = -1;
         String expect = null;
         String result = functionalDemo.access(invalidIndex);
-        assertEquals("acccess() should return null when invalid index, result=" + result, expect, result);
+        assertEquals("access(int) should return null when invalid index, result=" + result, expect, result);
     }
 
     @Test
-    public void access_performance_SHOULD_constant_WHEN_validIndex() {
-        int validIndex = 15;
-        String expect = null;
-        String result = performanceDemo.access(validIndex);
-        assertNotEquals("acccess() should return NOT return null when valid index, result=" + result, expect, result);
+    public void access_SHOULD_ReturnString_WHEN_ValidIndex(){
+        int validIndex = 0;
+        String expect = Integer.toString(validIndex);
+        String result = functionalDemo.access(validIndex);
+        assertNotNull("access(int) should not return null when using a valid index and the array element is not null.", result);
+        assertEquals("access(int) should return a string equivalent to the index value when valid index, result=" + result, expect, result);
     }
 
+    @Test
+    public void insert_SHOULD_ChangeArray_WHEN_ValidIndex(){
+      int validIndex = 2;
+      String insertValue = "0";
+      String[] functionalArrayCopy = new String[functionalTestSize];
+      System.arraycopy(functionalDemo.getArray(), 0, functionalArrayCopy, 0, functionalArrayCopy.length);
+      functionalDemo.insert(insertValue, validIndex);
+
+      System.out.println("\ninsert_SHOULD_ChangeArray_WHEN_ValidIndex");
+      System.out.println("Modified Array");
+      ArrayDemo.printArray(functionalDemo.getArray());
+      System.out.println("Original Array");
+      ArrayDemo.printArray(functionalArrayCopy);
+
+      boolean expectArraysDifferent = !Arrays.deepEquals(functionalDemo.getArray(), functionalArrayCopy);
+      boolean expectArrayLonger = (functionalDemo.getArray().length == functionalTestSize + 1);
+      boolean expectValueInserted = functionalDemo.getArray()[validIndex] == insertValue;
+
+      assertTrue("insert(String, int) should have changed the array", expectArraysDifferent);
+      assertTrue("insert(String, int) should have increased the array length", expectArrayLonger);
+      assertTrue("insert(String, int) should have the correct value in at the index", expectValueInserted);
+    }
+
+    @Test
+    public void insert_SHOULD_ChangeArray_WHEN_Appending(){
+      int validIndex = functionalDemo.getArray().length;
+      String insertValue = "0";
+      String[] functionalArrayCopy = new String[functionalTestSize];
+      System.arraycopy(functionalDemo.getArray(), 0, functionalArrayCopy, 0, functionalArrayCopy.length);
+      functionalDemo.insert(insertValue, validIndex);
+
+      System.out.println("\ninsert_SHOULD_ChangeArray_WHEN_Appending");
+      System.out.println("Modified Array");
+      ArrayDemo.printArray(functionalDemo.getArray());
+      System.out.println("Original Array");
+      ArrayDemo.printArray(functionalArrayCopy);
+
+      boolean expectArraysDifferent = !Arrays.deepEquals(functionalDemo.getArray(), functionalArrayCopy);
+      boolean expectArrayLonger = (functionalDemo.getArray().length == functionalTestSize + 1);
+      boolean expectValueInserted = functionalDemo.getArray()[validIndex] == insertValue;
+
+      assertTrue("insert(String, int) should have changed the array", expectArraysDifferent);
+      assertTrue("insert(String, int) should have increased the array length", expectArrayLonger);
+      assertTrue("insert(String, int) should have the correct value in at the index", expectValueInserted);
+    }
+
+    @Test
+    public void insert_SHOULD_NotChangeArray_WHEN_InvalidIndex(){
+      int invalidIndex = -1;
+      String insertValue = "0";
+      String[] functionalArrayCopy = new String[functionalTestSize];
+      System.arraycopy(functionalDemo.getArray(), 0, functionalArrayCopy, 0, functionalArrayCopy.length);
+      functionalDemo.insert(insertValue, invalidIndex);
+
+      System.out.println("\ninsert_SHOULD_NotChangeArray_WHEN_InvalidIndex");
+      System.out.println("Modified Array");
+      ArrayDemo.printArray(functionalDemo.getArray());
+      System.out.println("Original Array");
+      ArrayDemo.printArray(functionalArrayCopy);
+
+      boolean expectArraysSame = Arrays.deepEquals(functionalDemo.getArray(), functionalArrayCopy);
+
+      assertTrue("insert(String, int) should have NOT changed the array expectArraysSame=" + expectArraysSame, expectArraysSame);
+    }
 }
