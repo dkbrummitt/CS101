@@ -35,7 +35,7 @@ import java.util.Map;
 public class ValidationUtil {
 
     private ValidationUtil() {
-        //prevent instantiation. 
+        //prevent instantiation.
     }
 
     public static boolean isNullOrEmpty(Object anObject) {
@@ -67,7 +67,6 @@ public class ValidationUtil {
                 empty = aDictionary.isEmpty();
             }
         }
-        System.out.println("isNullOrEmpty? " + (nill || empty));
         return nill || empty;
     }
 
@@ -78,7 +77,6 @@ public class ValidationUtil {
 
         between = value >= min && value <= max;
 
-        System.out.println("isBetween? " + " a=" + a + " b=" + b + " value=" + value + " between=" + between);
         return between;
     }
 
@@ -87,7 +85,7 @@ public class ValidationUtil {
         if (!isNullOrEmpty(aCollection) && isBetween(0, aCollection.size() - 1, ndx)) {
             accessible = true;
         }
-        System.out.println("isAccessible? " + accessible);
+
         return accessible;
     }
 }
